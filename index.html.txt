@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مصطلحات الأمن السيبراني</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>دليل مصطلحات الأمن السيبراني وأمن الكمبيوتر</h1>
+    </header>
+    <main>
+        <p class="intro">
+            أهلاً بك في دليلك الشامل لمصطلحات الأمن السيبراني وأمن الكمبيوتر. اختر المصطلح الذي تريد معرفة تعريفه:
+        </p>
+        <div class="glossary-container">
+            </div>
+        <div id="definition-area" class="definition-area">
+            <h2>تعريف المصطلح</h2>
+            <p id="definition-text">اختر مصطلحًا من القائمة أعلاه لعرض تعريفه.</p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 تعلم بايثون مع يوسف هاشم</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
