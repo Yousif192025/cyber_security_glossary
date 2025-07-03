@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قاموس مصطلحات الأمن السيبراني</title>
+    <meta data-hid="description" name="description" content="قاموس شامل للمصطلحات الأساسية في مجال الأمن السيبراني وأمن المعلومات.">
+    <title>قاموس مصطلحات الأمن السيبراني | SANS Institute</title>
+    <link rel="icon" href="https://images.contentstack.io/v3/assets/blt36c2e63521272fdc/blt2f0555dca45e068f/60a7f26ea450c25ac83cf8f6/cropped-SANS-Blue-Square-32x32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="https://images.contentstack.io/v3/assets/blt36c2e63521272fdc/bltb065db290a92f932/60a7f27dc8faf774ab45ffd9/cropped-SANS-Blue-Square-180x180.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -318,8 +321,7 @@
         </div>
         
         <div class="terms-grid" id="termsContainer">
-            <!-- سيتم ملئه بواسطة JavaScript -->
-        </div>
+            </div>
         
         <div class="quiz-section">
             <h2><i class="fas fa-brain"></i> اختبر معلوماتك</h2>
@@ -459,26 +461,26 @@
 
         // تهيئة التطبيق عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', function() {
-            // عرض المصطلحات
+            // عرض المصطلحات الافتراضية عند التحميل
             renderTerms(terms);
             
-            // إعداد فلتر الفئات
+            // إعداد وظائف التصفية حسب الفئة
             setupCategoryFilters();
             
-            // إعداد البحث
+            // إعداد وظائف البحث
             setupSearch();
             
-            // إعداد الاختبار
+            // إعداد قسم الاختبار
             setupQuiz();
             
             // إعداد أزرار المشاركة
             setupShareButtons();
         });
 
-        // دالة لعرض المصطلحات
+        // دالة لعرض المصطلحات في الشبكة
         function renderTerms(termsToRender) {
             const container = document.getElementById('termsContainer');
-            container.innerHTML = '';
+            container.innerHTML = ''; // مسح المحتوى الحالي قبل إعادة العرض
             
             termsToRender.forEach(term => {
                 const termCard = document.createElement('div');
@@ -501,7 +503,7 @@
             });
         }
 
-        // دالة للحصول على اسم الفئة
+        // دالة مساعدة للحصول على الاسم العربي للفئة
         function getCategoryName(category) {
             const categories = {
                 'hacking': 'الاختراق',
@@ -509,26 +511,25 @@
                 'network': 'أمن الشبكات',
                 'encryption': 'التشفير'
             };
-            return categories[category] || 'عام';
+            return categories[category] || 'عام'; // إرجاع "عام" إذا لم تكن الفئة موجودة
         }
 
-        // إعداد فلتر الفئات
+        // إعداد وظائف الفلترة حسب الفئات
         function setupCategoryFilters() {
             const filterButtons = document.querySelectorAll('.filter-btn');
             
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // إزالة النشط من جميع الأزرار
+                    // إزالة فئة 'active' من جميع الأزرار ثم إضافتها للزر الحالي
                     filterButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // إضافة النشط للزر المحدد
                     this.classList.add('active');
                     
-                    const category = this.dataset.category;
+                    const category = this.dataset.category; // الحصول على الفئة من attribute "data-category"
                     
                     if (category === 'all') {
-                        renderTerms(terms);
+                        renderTerms(terms); // عرض جميع المصطلحات
                     } else {
+                        // تصفية المصطلحات بناءً على الفئة المختارة
                         const filteredTerms = terms.filter(term => term.category === category);
                         renderTerms(filteredTerms);
                     }
@@ -536,18 +537,19 @@
             });
         }
 
-        // إعداد البحث
+        // إعداد وظائف البحث
         function setupSearch() {
             const searchInput = document.getElementById('searchInput');
             
             searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
+                const searchTerm = this.value.toLowerCase(); // تحويل مدخل البحث إلى حروف صغيرة للمقارنة
                 
                 if (searchTerm.trim() === '') {
-                    renderTerms(terms);
+                    renderTerms(terms); // عرض جميع المصطلحات إذا كان حقل البحث فارغًا
                     return;
                 }
                 
+                // تصفية المصطلحات بناءً على وجود مصطلح البحث في الاسم أو التعريف
                 const filteredTerms = terms.filter(term => {
                     return term.term.toLowerCase().includes(searchTerm) || 
                            term.definition.toLowerCase().includes(searchTerm);
@@ -557,31 +559,34 @@
             });
         }
 
-        // إعداد الاختبار
+        // إعداد قسم الاختبار التفاعلي
         function setupQuiz() {
-            let currentQuestion = 0;
+            let currentQuestionIndex = 0; // تتبع السؤال الحالي
             const quizQuestionEl = document.getElementById('quizQuestion');
             const quizOptionsEl = document.getElementById('quizOptions');
             const quizResultEl = document.getElementById('quizResult');
             const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+            let score = 0; // تتبع النتيجة
+
+            // عرض السؤال الأول عند تهيئة الاختبار
+            showQuestion(currentQuestionIndex);
             
-            // عرض السؤال الأول
-            showQuestion(currentQuestion);
-            
-            // دالة لعرض السؤال
+            // دالة لعرض سؤال معين
             function showQuestion(index) {
                 if (index >= quizQuestions.length) {
+                    // إذا انتهت الأسئلة، عرض رسالة انتهاء الاختبار والنتيجة النهائية
                     quizQuestionEl.textContent = "انتهى الاختبار!";
                     quizOptionsEl.innerHTML = "";
-                    quizResultEl.textContent = `النتيجة النهائية: ${calculateScore()} من ${quizQuestions.length}`;
-                    nextQuestionBtn.style.display = 'none';
+                    quizResultEl.textContent = `النتيجة النهائية: ${score} من ${quizQuestions.length}`;
+                    nextQuestionBtn.style.display = 'none'; // إخفاء زر السؤال التالي
                     return;
                 }
                 
                 const question = quizQuestions[index];
                 quizQuestionEl.textContent = question.question;
-                quizOptionsEl.innerHTML = '';
-                quizResultEl.textContent = '';
+                quizOptionsEl.innerHTML = ''; // مسح الخيارات السابقة
+                quizResultEl.textContent = ''; // مسح نتيجة السؤال السابق
+                quizResultEl.className = 'quiz-result'; // إعادة ضبط فئة النتيجة
                 
                 question.options.forEach((option, i) => {
                     const optionEl = document.createElement('div');
@@ -589,70 +594,71 @@
                     optionEl.textContent = option;
                     
                     optionEl.addEventListener('click', function() {
-                        checkAnswer(i);
+                        checkAnswer(i); // التحقق من الإجابة عند النقر على الخيار
                     });
                     
                     quizOptionsEl.appendChild(optionEl);
                 });
+                nextQuestionBtn.textContent = 'السؤال التالي'; // إعادة تعيين نص الزر
+                nextQuestionBtn.style.display = 'block'; // التأكد من أن الزر مرئي
             }
             
             // دالة للتحقق من الإجابة
             function checkAnswer(selectedIndex) {
-                const question = quizQuestions[currentQuestion];
+                const question = quizQuestions[currentQuestionIndex];
                 const options = document.querySelectorAll('.quiz-option');
                 
-                // إلغاء تفعيل جميع الخيارات
+                // تعطيل جميع الخيارات بعد الإجابة لمنع التغيير
                 options.forEach(option => {
                     option.style.pointerEvents = 'none';
                 });
                 
                 if (selectedIndex === question.correctAnswer) {
-                    options[selectedIndex].style.backgroundColor = '#2ecc71';
+                    options[selectedIndex].style.backgroundColor = '#2ecc71'; // لون أخضر للإجابة الصحيحة
                     quizResultEl.textContent = 'إجابة صحيحة!';
-                    quizResultEl.className = 'quiz-result result-correct';
+                    quizResultEl.classList.add('result-correct');
+                    score++; // زيادة النتيجة
                 } else {
-                    options[selectedIndex].style.backgroundColor = '#e74c3c';
-                    options[question.correctAnswer].style.backgroundColor = '#2ecc71';
+                    options[selectedIndex].style.backgroundColor = '#e74c3c'; // لون أحمر للإجابة الخاطئة
+                    options[question.correctAnswer].style.backgroundColor = '#2ecc71'; // إظهار الإجابة الصحيحة باللون الأخضر
                     quizResultEl.textContent = 'إجابة خاطئة!';
-                    quizResultEl.className = 'quiz-result result-incorrect';
+                    quizResultEl.classList.add('result-incorrect');
                 }
             }
             
-            // دالة لحساب النتيجة
-            function calculateScore() {
-                // في تطبيق حقيقي، سنخزن الإجابات ونحسب النتيجة
-                return Math.floor(Math.random() * (quizQuestions.length - 1)) + 1;
-            }
-            
-            // زر السؤال التالي
+            // معالج حدث لزر "السؤال التالي"
             nextQuestionBtn.addEventListener('click', function() {
-                currentQuestion++;
-                showQuestion(currentQuestion);
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex); // عرض السؤال التالي
             });
         }
 
         // إعداد أزرار المشاركة
         function setupShareButtons() {
-            const shareUrl = window.location.href;
+            const shareUrl = window.location.href; // الحصول على عنوان URL الحالي للصفحة
             const title = 'قاموس مصطلحات الأمن السيبراني';
             
             document.getElementById('shareWhatsapp').addEventListener('click', function(e) {
                 e.preventDefault();
+                // فتح رابط واتساب للمشاركة
                 window.open(`https://wa.me/?text=${encodeURIComponent(title + ': ' + shareUrl)}`, '_blank');
             });
             
             document.getElementById('shareTwitter').addEventListener('click', function(e) {
                 e.preventDefault();
+                // فتح رابط تويتر للمشاركة
                 window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
             });
             
             document.getElementById('shareFacebook').addEventListener('click', function(e) {
                 e.preventDefault();
+                // فتح رابط فيسبوك للمشاركة
                 window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
             });
             
             document.getElementById('shareLink').addEventListener('click', function(e) {
                 e.preventDefault();
+                // نسخ الرابط إلى الحافظة
                 navigator.clipboard.writeText(shareUrl).then(() => {
                     alert('تم نسخ الرابط إلى الحافظة!');
                 });
