@@ -3,92 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta data-hid="description" name="description" content="قاموس شامل للمصطلحات الأساسية في مجال الأمن السيبراني وأمن المعلومات.">
-    <title>قاموس مصطلحات الأمن السيبراني | SANS Institute</title>
+    <meta name="description" content="قاموس شامل للمصطلحات الأساسية في مجال الأمن السيبراني وأمن المعلومات، مقدم بأسلوب مبسط ومزود باختبارات تفاعلية.">
+    <title>قاموس مصطلحات الأمن السيبراني</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="https://images.contentstack.io/v3/assets/blt36c2e63521272fdc/blt2f0555dca45e068f/60a7f26ea450c25ac83cf8f6/cropped-SANS-Blue-Square-32x32.png" sizes="32x32">
     <link rel="apple-touch-icon" href="https://images.contentstack.io/v3/assets/blt36c2e63521272fdc/bltb065db290a92f932/60a7f27dc8faf774ab45ffd9/cropped-SANS-Blue-Square-180x180.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* تعريف متغيرات CSS لتسهيل إدارة الألوان */
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #1a252f;
+            --primary-bg: #f4f7f6;
+            --text-color: #333;
+            --header-bg: #2c3e50;
+            --header-text: #ecf0f1;
+            --main-bg: #fff;
+            --box-shadow-light: rgba(0, 0, 0, 0.1);
+            --box-shadow-dark: rgba(0, 0, 0, 0.2);
+            --button-bg: #3498db;
+            --button-hover: #2980b9;
+            --definition-bg: #ecf0f1;
+            --definition-border: #2c3e50;
+            --intro-color: #555;
+            --glossary-border: #ddd;
+            --glossary-bg: #f9f9f9;
+            --accent-color: #e74c3c; /* لون مميز للفئات مثلاً */
         }
-        
+
+        /* إعادة ضبط التنسيقات الافتراضية للمتصفح */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        /* تنسيقات الجسم الرئيسية */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--primary);
-            color: var(--light);
+            font-family: 'Cairo', sans-serif; /* استخدام خط القاهرة */
+            background-color: var(--primary-bg);
+            color: var(--text-color);
             line-height: 1.6;
+            direction: rtl; /* لجعل اتجاه النص من اليمين لليسار */
+            text-align: right; /* لمحاذاة النص لليمين */
         }
-        
+
+        /* تنسيقات الحاوية العامة للمحتوى */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
+        /* تنسيقات رأس الصفحة */
         header {
             text-align: center;
             padding: 30px 0;
-            background: linear-gradient(135deg, var(--dark), var(--primary));
-            border-bottom: 3px solid var(--secondary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, var(--header-bg), var(--definition-border)); /* تدرج لوني */
+            border-bottom: 3px solid var(--button-bg);
+            box-shadow: 0 4px 12px var(--box-shadow-dark);
+            color: var(--header-text); /* لون النص في الرأس */
         }
-        
+
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            color: var(--light);
+            color: var(--header-text);
         }
-        
+
         header p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
-            color: #bdc3c7;
+            color: #bdc3c7; /* لون رمادي فاتح للوصف */
         }
-        
+
+        /* تنسيقات حاوية البحث */
         .search-container {
             max-width: 600px;
             margin: 30px auto;
             position: relative;
         }
-        
+
         .search-container input {
             width: 100%;
             padding: 15px 20px;
             border-radius: 50px;
-            border: none;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            color: white;
+            border: none; /* إزالة الحدود الافتراضية */
+            background: rgba(255, 255, 255, 0.1); /* خلفية شفافة */
+            backdrop-filter: blur(10px); /* تأثير ضبابي */
+            color: var(--header-text); /* لون النص المدخل */
             font-size: 1.1rem;
-            border: 2px solid var(--secondary);
+            border: 2px solid var(--button-bg); /* حدود بلون الزر */
         }
-        
+
+        .search-container input::placeholder {
+            color: rgba(255, 255, 255, 0.7); /* لون النص النائب الشفاف */
+        }
+
         .search-container input:focus {
             outline: none;
-            box-shadow: 0 0 10px var(--secondary);
+            box-shadow: 0 0 10px var(--button-bg);
         }
-        
+
         .search-container i {
             position: absolute;
-            right: 20px;
+            left: 20px; /* الأيقونة على اليسار لاتجاه RTL */
             top: 50%;
             transform: translateY(-50%);
-            color: var(--secondary);
+            color: var(--button-bg);
             font-size: 1.2rem;
         }
-        
+
+        /* تنسيقات أزرار الفلترة */
         .filter-buttons {
             display: flex;
             justify-content: center;
@@ -96,145 +124,158 @@
             gap: 10px;
             margin: 20px 0 30px;
         }
-        
+
         .filter-btn {
-            background: rgba(52, 152, 219, 0.2);
-            border: 1px solid var(--secondary);
-            color: var(--light);
+            background: rgba(52, 152, 219, 0.2); /* خلفية شفافة من لون الزر */
+            border: 1px solid var(--button-bg);
+            color: var(--header-text); /* لون النص */
             padding: 8px 20px;
             border-radius: 30px;
             cursor: pointer;
+            font-size: 1em;
             transition: all 0.3s ease;
         }
-        
+
         .filter-btn:hover, .filter-btn.active {
-            background: var(--secondary);
+            background: var(--button-bg);
+            color: white; /* نص أبيض عند التفعيل أو التمرير */
         }
-        
+
+        /* تنسيقات شبكة المصطلحات */
         .terms-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
         }
-        
+
+        /* تنسيقات بطاقة المصطلح الفردية */
         .term-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--main-bg); /* خلفية بيضاء لبطاقة المصطلح */
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px var(--box-shadow-light);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid #eee; /* حدود خفيفة */
         }
-        
+
         .term-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            border-color: var(--secondary);
+            border-color: var(--button-bg); /* حدود بلون الأزرار عند التمرير */
         }
-        
+
         .term-header {
-            background: rgba(44, 62, 80, 0.8);
+            background: var(--definition-border); /* خلفية رأس البطاقة بلون غامق */
             padding: 20px;
-            border-bottom: 2px solid var(--secondary);
+            border-bottom: 2px solid var(--button-bg); /* خط سفلي بلون الزر */
+            color: var(--header-text);
         }
-        
+
         .term-header h3 {
             font-size: 1.5rem;
             margin-bottom: 5px;
-            color: var(--light);
+            color: var(--header-text);
         }
-        
+
         .term-header .category {
             display: inline-block;
-            background: var(--accent);
+            background: var(--accent-color); /* لون مميز للفئة */
             padding: 3px 10px;
             border-radius: 20px;
             font-size: 0.85rem;
+            color: white;
         }
-        
+
         .term-body {
             padding: 20px;
+            color: var(--text-color);
         }
-        
+
         .term-body p {
             margin-bottom: 15px;
             font-size: 1.1rem;
         }
-        
+
         .term-body .example {
             background: rgba(52, 152, 219, 0.1);
             padding: 15px;
             border-radius: 10px;
-            border-left: 3px solid var(--secondary);
+            border-right: 3px solid var(--button-bg); /* خط جانبي على اليمين للمثال */
             margin-top: 15px;
             font-style: italic;
+            color: var(--intro-color); /* لون نص المثال */
         }
-        
+
+        /* تنسيقات قسم الاختبار */
         .quiz-section {
-            background: rgba(26, 37, 47, 0.8);
+            background: var(--header-bg); /* خلفية غامقة لقسم الاختبار */
             padding: 40px 20px;
             margin: 50px 0;
             border-radius: 15px;
-            border: 1px solid var(--secondary);
+            border: 1px solid var(--button-bg);
             text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
+
         .quiz-section h2 {
             font-size: 2rem;
             margin-bottom: 20px;
-            color: var(--light);
+            color: var(--header-text);
         }
-        
+
         .quiz-container {
             max-width: 800px;
             margin: 0 auto;
-            background: rgba(44, 62, 80, 0.7);
+            background: rgba(44, 62, 80, 0.7); /* خلفية شفافة قليلاً */
             padding: 30px;
             border-radius: 15px;
         }
-        
+
         .quiz-question {
             font-size: 1.4rem;
             margin-bottom: 25px;
+            color: var(--header-text);
         }
-        
+
         .quiz-options {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
             margin-bottom: 25px;
         }
-        
+
         .quiz-option {
             background: rgba(52, 152, 219, 0.2);
-            border: 1px solid var(--secondary);
+            border: 1px solid var(--button-bg);
             padding: 15px;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
+            color: var(--header-text);
         }
-        
+
         .quiz-option:hover {
-            background: var(--secondary);
+            background: var(--button-bg);
         }
-        
+
         .quiz-result {
             font-size: 1.3rem;
             font-weight: bold;
             margin-top: 20px;
             min-height: 30px;
         }
-        
+
         .result-correct {
-            color: #2ecc71;
+            color: #2ecc71; /* أخضر للإجابة الصحيحة */
         }
-        
+
         .result-incorrect {
-            color: #e74c3c;
+            color: #e74c3c; /* أحمر للإجابة الخاطئة */
         }
-        
+
+        /* تنسيقات الأزرار العامة (مثل زر السؤال التالي) */
         .btn {
-            background: var(--secondary);
+            background: var(--button-bg);
             color: white;
             border: none;
             padding: 12px 30px;
@@ -245,31 +286,33 @@
             display: inline-block;
             margin-top: 15px;
         }
-        
+
         .btn:hover {
-            background: #2980b9;
+            background: var(--button-hover);
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
+
+        /* تنسيقات التذييل */
         footer {
             text-align: center;
             padding: 30px 0;
             margin-top: 50px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #bdc3c7;
+            background-color: var(--header-bg); /* خلفية التذييل بلون الرأس */
+            color: #bdc3c7; /* لون رمادي فاتح للنص */
         }
-        
+
         .share-buttons {
             margin-top: 20px;
         }
-        
+
         .share-btn {
             display: inline-block;
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--secondary);
+            background: var(--button-bg);
             color: white;
             line-height: 50px;
             text-align: center;
@@ -277,23 +320,60 @@
             font-size: 1.2rem;
             transition: all 0.3s ease;
         }
-        
+
         .share-btn:hover {
             transform: translateY(-5px);
-            background: #2980b9;
+            background: var(--button-hover);
         }
-        
+
+        /* الاستجابة لتنسيقات الشاشات الصغيرة (Mobile Responsiveness) */
         @media (max-width: 768px) {
-            .terms-grid {
-                grid-template-columns: 1fr;
-            }
-            
             header h1 {
                 font-size: 2rem;
             }
-            
+            header p {
+                font-size: 1rem;
+            }
+            .search-container {
+                margin: 20px 10px;
+            }
+            .filter-buttons {
+                flex-direction: column; /* الأزرار عمودية */
+                padding: 0 10px;
+            }
+            .filter-btn {
+                width: 100%; /* الأزرار تأخذ عرضًا كاملاً */
+            }
+            .terms-grid {
+                grid-template-columns: 1fr; /* عمود واحد لبطاقات المصطلحات */
+                padding: 0 10px;
+            }
+            .term-card {
+                margin: 0 auto;
+                width: 95%;
+            }
+            .quiz-section {
+                margin: 30px 10px;
+                padding: 20px;
+            }
+            .quiz-question {
+                font-size: 1.2rem;
+            }
             .quiz-options {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* عمود واحد لخيارات الاختبار */
+            }
+            .quiz-option {
+                padding: 12px;
+            }
+            .quiz-result {
+                font-size: 1.1rem;
+            }
+            .btn {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+            footer {
+                padding: 20px 10px;
             }
         }
     </style>
@@ -349,7 +429,7 @@
     </footer>
     
     <script>
-        // بيانات المصطلحات
+        // بيانات المصطلحات التي ستعرض في القاموس
         const terms = [
             {
                 term: "التصيد (Phishing)",
@@ -425,7 +505,7 @@
             }
         ];
 
-        // أسئلة الاختبار
+        // أسئلة الاختبار التفاعلي
         const quizQuestions = [
             {
                 question: "ما هو الهجوم الذي يستخدم رسائل بريد إلكتروني مزيفة لخداع الضحايا؟",
@@ -459,29 +539,33 @@
             }
         ];
 
-        // تهيئة التطبيق عند تحميل الصفحة
+        // تهيئة التطبيق عند تحميل الصفحة بالكامل
         document.addEventListener('DOMContentLoaded', function() {
-            // عرض المصطلحات الافتراضية عند التحميل
+            // عرض المصطلحات الافتراضية عند التحميل الأول
             renderTerms(terms);
             
-            // إعداد وظائف التصفية حسب الفئة
+            // إعداد مستمعي الأحداث لأزرار فلترة الفئات
             setupCategoryFilters();
             
-            // إعداد وظائف البحث
+            // إعداد مستمعي الأحداث لوظيفة البحث
             setupSearch();
             
-            // إعداد قسم الاختبار
+            // تهيئة وإعداد قسم الاختبار
             setupQuiz();
             
-            // إعداد أزرار المشاركة
+            // إعداد وظائف أزرار المشاركة
             setupShareButtons();
         });
 
-        // دالة لعرض المصطلحات في الشبكة
+        /**
+         * دالة لإنشاء وعرض بطاقات المصطلحات في الحاوية المخصصة.
+         * @param {Array<Object>} termsToRender - مصفوفة المصطلحات التي سيتم عرضها.
+         */
         function renderTerms(termsToRender) {
             const container = document.getElementById('termsContainer');
-            container.innerHTML = ''; // مسح المحتوى الحالي قبل إعادة العرض
-            
+            container.innerHTML = ''; // مسح المحتوى الحالي قبل إضافة الجديد
+
+            // إنشاء بطاقة لكل مصطلح وعرضها
             termsToRender.forEach(term => {
                 const termCard = document.createElement('div');
                 termCard.className = 'term-card';
@@ -503,7 +587,11 @@
             });
         }
 
-        // دالة مساعدة للحصول على الاسم العربي للفئة
+        /**
+         * دالة مساعدة لتحويل اسم الفئة الإنجليزي إلى الاسم العربي المناسب للعرض.
+         * @param {string} category - اسم الفئة باللغة الإنجليزية.
+         * @returns {string} - اسم الفئة باللغة العربية.
+         */
         function getCategoryName(category) {
             const categories = {
                 'hacking': 'الاختراق',
@@ -511,10 +599,12 @@
                 'network': 'أمن الشبكات',
                 'encryption': 'التشفير'
             };
-            return categories[category] || 'عام'; // إرجاع "عام" إذا لم تكن الفئة موجودة
+            return categories[category] || 'عام'; // إرجاع "عام" إذا لم تكن الفئة معرفة
         }
 
-        // إعداد وظائف الفلترة حسب الفئات
+        /**
+         * إعداد وظائف الفلترة حسب الفئات عند النقر على الأزرار.
+         */
         function setupCategoryFilters() {
             const filterButtons = document.querySelectorAll('.filter-btn');
             
@@ -524,7 +614,7 @@
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
                     
-                    const category = this.dataset.category; // الحصول على الفئة من attribute "data-category"
+                    const category = this.dataset.category; // الحصول على الفئة من سمة data-category
                     
                     if (category === 'all') {
                         renderTerms(terms); // عرض جميع المصطلحات
@@ -537,7 +627,9 @@
             });
         }
 
-        // إعداد وظائف البحث
+        /**
+         * إعداد وظائف البحث عن المصطلحات عند إدخال النص.
+         */
         function setupSearch() {
             const searchInput = document.getElementById('searchInput');
             
@@ -549,7 +641,7 @@
                     return;
                 }
                 
-                // تصفية المصطلحات بناءً على وجود مصطلح البحث في الاسم أو التعريف
+                // تصفية المصطلحات بناءً على وجود مصطلح البحث في اسم المصطلح أو تعريفه
                 const filteredTerms = terms.filter(term => {
                     return term.term.toLowerCase().includes(searchTerm) || 
                            term.definition.toLowerCase().includes(searchTerm);
@@ -559,51 +651,63 @@
             });
         }
 
-        // إعداد قسم الاختبار التفاعلي
+        /**
+         * إعداد منطق قسم الاختبار التفاعلي.
+         */
         function setupQuiz() {
-            let currentQuestionIndex = 0; // تتبع السؤال الحالي
+            let currentQuestionIndex = 0; // مؤشر لتتبع السؤال الحالي
+            let score = 0; // لتتبع نتيجة المستخدم
+
             const quizQuestionEl = document.getElementById('quizQuestion');
             const quizOptionsEl = document.getElementById('quizOptions');
             const quizResultEl = document.getElementById('quizResult');
             const nextQuestionBtn = document.getElementById('nextQuestionBtn');
-            let score = 0; // تتبع النتيجة
 
             // عرض السؤال الأول عند تهيئة الاختبار
             showQuestion(currentQuestionIndex);
             
-            // دالة لعرض سؤال معين
+            /**
+             * دالة لعرض سؤال معين في الاختبار.
+             * @param {number} index - فهرس السؤال لعرضه.
+             */
             function showQuestion(index) {
                 if (index >= quizQuestions.length) {
-                    // إذا انتهت الأسئلة، عرض رسالة انتهاء الاختبار والنتيجة النهائية
+                    // إذا انتهت جميع الأسئلة، عرض رسالة انتهاء الاختبار والنتيجة النهائية
                     quizQuestionEl.textContent = "انتهى الاختبار!";
-                    quizOptionsEl.innerHTML = "";
+                    quizOptionsEl.innerHTML = ""; // مسح خيارات الإجابة
                     quizResultEl.textContent = `النتيجة النهائية: ${score} من ${quizQuestions.length}`;
+                    quizResultEl.className = 'quiz-result result-correct'; // إعادة ضبط الفئة للعرض الصحيح للنتيجة النهائية
                     nextQuestionBtn.style.display = 'none'; // إخفاء زر السؤال التالي
                     return;
                 }
                 
                 const question = quizQuestions[index];
                 quizQuestionEl.textContent = question.question;
-                quizOptionsEl.innerHTML = ''; // مسح الخيارات السابقة
+                quizOptionsEl.innerHTML = ''; // مسح الخيارات من السؤال السابق
                 quizResultEl.textContent = ''; // مسح نتيجة السؤال السابق
-                quizResultEl.className = 'quiz-result'; // إعادة ضبط فئة النتيجة
-                
+                quizResultEl.className = 'quiz-result'; // إعادة ضبط الفئة للتحقق الجديد
+
+                // إنشاء خيارات الإجابة لكل سؤال
                 question.options.forEach((option, i) => {
                     const optionEl = document.createElement('div');
                     optionEl.className = 'quiz-option';
                     optionEl.textContent = option;
                     
+                    // إضافة مستمع حدث للنقر على الخيار
                     optionEl.addEventListener('click', function() {
-                        checkAnswer(i); // التحقق من الإجابة عند النقر على الخيار
+                        checkAnswer(i); // التحقق من الإجابة عند النقر
                     });
                     
                     quizOptionsEl.appendChild(optionEl);
                 });
-                nextQuestionBtn.textContent = 'السؤال التالي'; // إعادة تعيين نص الزر
+                nextQuestionBtn.textContent = 'السؤال التالي'; // التأكد من نص الزر
                 nextQuestionBtn.style.display = 'block'; // التأكد من أن الزر مرئي
             }
             
-            // دالة للتحقق من الإجابة
+            /**
+             * دالة للتحقق من إجابة المستخدم.
+             * @param {number} selectedIndex - فهرس الخيار الذي اختاره المستخدم.
+             */
             function checkAnswer(selectedIndex) {
                 const question = quizQuestions[currentQuestionIndex];
                 const options = document.querySelectorAll('.quiz-option');
@@ -633,34 +737,34 @@
             });
         }
 
-        // إعداد أزرار المشاركة
+        /**
+         * إعداد وظائف أزرار المشاركة الاجتماعية.
+         */
         function setupShareButtons() {
             const shareUrl = window.location.href; // الحصول على عنوان URL الحالي للصفحة
             const title = 'قاموس مصطلحات الأمن السيبراني';
             
             document.getElementById('shareWhatsapp').addEventListener('click', function(e) {
                 e.preventDefault();
-                // فتح رابط واتساب للمشاركة
                 window.open(`https://wa.me/?text=${encodeURIComponent(title + ': ' + shareUrl)}`, '_blank');
             });
             
             document.getElementById('shareTwitter').addEventListener('click', function(e) {
                 e.preventDefault();
-                // فتح رابط تويتر للمشاركة
                 window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
             });
             
             document.getElementById('shareFacebook').addEventListener('click', function(e) {
                 e.preventDefault();
-                // فتح رابط فيسبوك للمشاركة
                 window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
             });
             
             document.getElementById('shareLink').addEventListener('click', function(e) {
                 e.preventDefault();
-                // نسخ الرابط إلى الحافظة
                 navigator.clipboard.writeText(shareUrl).then(() => {
                     alert('تم نسخ الرابط إلى الحافظة!');
+                }).catch(err => {
+                    console.error('فشل في نسخ الرابط: ', err);
                 });
             });
         }
